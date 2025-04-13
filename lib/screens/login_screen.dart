@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
-class Loginscreen extends StatelessWidget {
-  const Loginscreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+  @override
+  State<StatefulWidget> createState() {
+    return _Loginscreen();
+  }
+}
+
+class _Loginscreen extends State<LoginScreen> {
+  bool isClicked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -58,17 +66,44 @@ class Loginscreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () => {Navigator.pushNamed(context, "/home")},
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(double.infinity, 50),
-                  foregroundColor: Colors.white,
-                  backgroundColor: const Color.fromARGB(255, 48, 185, 180),
-                  textStyle: TextStyle(fontSize: 17),
-                ),
 
-                child: Text("Login"),
+              InkWell(
+                onTap:
+                    () => {
+                      setState(() {
+                        isClicked = !isClicked;
+                      }),
+                    },
+                child: AnimatedContainer(
+                  alignment: Alignment.center,
+                  duration: Duration(milliseconds: 300),
+                  height: 40,
+                  width: isClicked ? 40 : MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(40),
+                    color: Color.fromARGB(255, 48, 185, 180),
+                  ),
+                  child:
+                      isClicked
+                          ? Icon(Icons.done, color: Colors.white)
+                          : Text(
+                            "Login",
+                            style: TextStyle(color: Colors.white, fontSize: 17),
+                          ),
+                ),
               ),
+
+              // ElevatedButton(
+              //   onPressed: () => {Navigator.pushNamed(context, "/home")},
+              //   style: ElevatedButton.styleFrom(
+              //     minimumSize: Size(double.infinity, 50),
+              //     foregroundColor: Colors.white,
+              //     backgroundColor: const Color.fromARGB(255, 48, 185, 180),
+              //     textStyle: TextStyle(fontSize: 17),
+              //   ),
+
+              //   child: Text("Login"),
+              // ),
             ],
           ),
         ),
